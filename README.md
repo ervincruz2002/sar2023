@@ -29,7 +29,7 @@ sudo apt install bind9
 sudo nano /etc/bind/named.conf.local
 ```
 
-2. Agrega una zona de búsqueda directa (forward zone) para tu dominio. Reemplaza `sar2023.com` con tu propio dominio y `ip_del_servidor` con la dirección IP de tu servidor DNS:
+2. Agrega una zona de búsqueda directa (forward zone) para tu dominio. Reemplaza `ip_del_servidor` con la dirección IP de tu servidor DNS:
 
 ```plaintext
 zone "sar2023.com" {
@@ -44,7 +44,7 @@ zone "sar2023.com" {
 sudo nano /etc/bind/zones/db.sar2023.com
 ```
 
-4. Configura la zona de búsqueda directa agregando registros DNS. Aquí tienes un ejemplo para un servidor web:
+4. Configura la zona de búsqueda directa agregando registros DNS. Reemplaza `ip_del_servidor` con la dirección IP de tu servidor DNS: Aquí un ejemplo para un servidor web:
 
 ```plaintext
 $TTL    86400
