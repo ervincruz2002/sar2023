@@ -1,7 +1,10 @@
-# Configuración de un Servidor DNS en Ubuntu
+# Configuración de un Servidor DNS en Ubuntu Server
 
 En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Ubuntu utilizando BIND (Berkeley Internet Name Domain), uno de los servidores DNS más populares en sistemas Unix/Linux.
 
+## Link al video del Laboratorio de DNS en Ubuntu Server: 
+
+[Video Explicacion Laboratorio DNS](https://youtu.be/mjiwamWDz38)
 
 ## Paso 1: Actualizar el sistema
 
@@ -111,6 +114,10 @@ Deberías obtener respuestas correctas con las direcciones IP que configuraste e
 # Configuración de un Servidor DNS en Windows Server (Demostracion)
 
 En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Windows Server y verificar su funcionamiento mediante Ubuntu Server.
+
+## Link al video del Laboratorio de DNS en Windows Server:
+
+[Video Explicacion Laboratorio DNS](https://youtu.be/Cb2KwLBDjPE)
 
 ## Paso 1: Abrimos Windows Server
 
