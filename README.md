@@ -117,7 +117,7 @@ En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Window
 
 ## Link al video del Laboratorio de DNS en Windows Server:
 
-[Video Explicacion Laboratorio DNS](https://youtu.be/Cb2KwLBDjPE)
+[Video Demostracion DNS](https://youtu.be/Cb2KwLBDjPE)
 
 ## Paso 1: Abrimos Windows Server
 
