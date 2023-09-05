@@ -2,7 +2,6 @@
 
 En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Ubuntu utilizando BIND (Berkeley Internet Name Domain), uno de los servidores DNS más populares en sistemas Unix/Linux.
 
-**Nota importante:** Asegúrate de tener acceso a un servidor Ubuntu con privilegios de superusuario (root) o un usuario con privilegios sudo. Antes de realizar cambios significativos, haz copias de seguridad de tu sistema.
 
 ## Paso 1: Actualizar el sistema
 
@@ -37,8 +36,11 @@ zone "sar2023.com" {
     file "/etc/bind/zones/db.sar2023.com";
 };
 ```
-
-3. Crea el archivo de zona de búsqueda directa:
+2. Crea el directorio `zones` en `/etc/bind/`:
+```bash
+sudo mkdir /etc/bind/zones/
+```
+4. Crea el archivo de zona de búsqueda directa:
 
 ```bash
 sudo nano /etc/bind/zones/db.sar2023.com
@@ -89,16 +91,122 @@ sudo systemctl restart bind9
 
 ## Paso 6: Configurar la resolución DNS en el cliente
 
-En las computadoras que deseen utilizar tu servidor DNS, configura la dirección IP de tu servidor DNS en el archivo `/etc/resolv.conf` o en la configuración de red de forma adecuada.
+En las computadoras que deseen utilizar tu servidor DNS, configura la dirección IP de tu servidor DNS en el archivo `/etc/resolv.conf` o en la configuración de red de forma adecuada. En el archivo `resolv.conf` colocar lo siguiente:
+```bash
+nameserver ip_del_servidor
+```
 
 ## Paso 7: Prueba la configuración
 
 Para probar si tu servidor DNS está funcionando correctamente, puedes usar el comando `nslookup` o `dig` desde una computadora cliente:
 
 ```bash
-nslookup sar2023.com
+nslookup google.com
 ```
 
 Deberías obtener respuestas correctas con las direcciones IP que configuraste en tu servidor DNS.
 
-¡Eso es todo! Ahora tienes un servidor DNS funcionando en Ubuntu con el dominio `sar2023.com`. Asegúrate de mantener tu servidor y registros DNS actualizados según tus necesidades específicas.
+
+
+# Configuración de un Servidor DNS en Windows Server (Demostracion)
+
+En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Windows Server y verificar su funcionamiento mediante Ubuntu Server.
+
+## Paso 1: Abrimos Windows Server
+
+Esta es la interfaz principal de Windows Server:
+
+![Interfaz principal de Windows Server](https://github.com/ervincruz2002/sar2023/blob/main/demo0.jpeg)
+
+## Paso 2: Asignamos el rol de servidor DNS a nuestro Windows Server:
+
+1. Nos vamos al segundo apartado `Agregar roles y características` y damos click en siguiente hasta que nos salga este apartado:
+
+![Ventana de configuracion de roles y caracteristicas](https://github.com/ervincruz2002/sar2023/blob/main/demo1.jpeg)
+
+2. Ahi le damos a la opcion de servidor DNS y hacemos click en agregar, le damos siguiente y por ultimo instalar. Y comenzara a instalar el DNS:
+   
+![Ventana de configuracion de roles y caracteristicas](https://github.com/ervincruz2002/sar2023/blob/main/demo2.jpeg)
+
+## Paso 3: Configuracion del servidor DNS:
+
+1.  Nos vamos al apartado `Herramientas>DNS`:
+
+![Seleccion del apartado Herramientas>DNS en la ventana principal de Windows Server](https://github.com/ervincruz2002/sar2023/blob/main/demo3.jpeg)
+
+2. Nos mostrará el apartado siguiente:
+
+![Ventana Administrador DNS](https://github.com/ervincruz2002/sar2023/blob/main/demo4.jpeg)
+
+3. En el apartado `Zonas de búsqueda directa`, damos click derecho y damos click izquierdo en `Zona nueva`:
+
+![Seleccion de Zonas de busqueda directa>Zona Nueva](https://github.com/ervincruz2002/sar2023/blob/main/demo5.jpeg)
+
+4. Damos click en siguiente hasta que nos salga nombre de zona, ahi le asignamos uno:
+
+![Asignacion del nombre de la nueva zona](https://github.com/ervincruz2002/sar2023/blob/main/demo6.jpeg)
+
+5. Damos click en siguiente, siguiente y finalizar.
+
+6. Luego realizamos lo mismo con zonas de búsqueda invertida, damos click derecho y `Zona nueva` y debería de salir el siguiente apartado:
+
+![Ventana de asistente para nueva zona](https://github.com/ervincruz2002/sar2023/blob/main/demo7.jpeg)
+
+7. Colocamos la direccion ip de nuestro server.
+   
+8. Damos click en siguiente, siguiente y finalizar.
+
+9. Nos vamos a la zona anteriormente creada:
+
+![Ventana Adninistrador DNS](https://github.com/ervincruz2002/sar2023/blob/main/demo8.jpeg)
+
+10. Damos click derecho y luego click izquierdo en `Host nuevo A o AAAA`:
+
+![Ventana Adninistrador DNS](https://github.com/ervincruz2002/sar2023/blob/main/demo9.jpeg)
+
+11. Colocamos la dirección ip de nuestro server y damos click en `Agregar host`:
+    
+![Ventana Host Nuevo](https://github.com/ervincruz2002/sar2023/blob/main/demo10.jpeg)
+
+Es opcional agregar un host www, si se quiere agregar uno solo, en nombre de host se coloca el www y abajo la ip del server.
+
+## Paso 4: Configuracion del cliente:
+
+1. En un Ubuntu Server nos vamos a editar el archivo `/etc/resolv.conf` y en la configuracion `nameserver` colocamos la ip de nuestro servidor DNS:
+
+```bash
+nameserver 192.168.126.134
+options edns0 trust-ad
+search localdomain
+```
+
+3. Cerramos y guardamos el archivo.
+
+## Paso 5: Pruebas de funcionamiento:
+Podemos comprobar el server con el comando `nslookup nombre_del_server` o `nslookup ip_del_server`. Y tendriamos un ouput similar a este:
+
+```bash
+silva2405@sar2023:~$ nslookup sar2023.com.co
+Server:         192.168.126.134
+Address:        192.168.126.134#53
+
+Name:   sar2023.com.co
+Address: 192.168.126.134
+
+silva2405@sar2023:~$ nslookup 192.168.126.134
+134.126.168.192.in-addr.arpa    name = www.sar2023.com.co.
+134.126.168.192.in-addr.arpa    name = sar2023.com.co.
+
+silva2405@sar2023:~$
+```
+
+
+
+   
+
+   
+
+
+
+
+
