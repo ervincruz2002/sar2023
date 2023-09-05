@@ -4,7 +4,7 @@ En esta guía, aprenderás cómo configurar un servidor DNS en un sistema Ubuntu
 
 ## Link al video del Laboratorio de DNS en Ubuntu Server: 
 
-[Video Explicacion Laboratorio DNS](https://youtu.be/mjiwamWDz38)
+[Video Explicacion Laboratorio DNS](https://youtu.be/0Bb3zI9mKg0)
 
 ## Paso 1: Actualizar el sistema
 
