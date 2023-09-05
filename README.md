@@ -102,4 +102,3 @@ nslookup sar2023.com
 Deberías obtener respuestas correctas con las direcciones IP que configuraste en tu servidor DNS.
 
 ¡Eso es todo! Ahora tienes un servidor DNS funcionando en Ubuntu con el dominio `sar2023.com`. Asegúrate de mantener tu servidor y registros DNS actualizados según tus necesidades específicas.
-```
